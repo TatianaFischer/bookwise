@@ -1,7 +1,21 @@
 <?php
-require 'dados.php';
-?>
 
+require 'dados.php';
+
+$id = $_REQUEST['id'];
+$filtrado = array_filter($livros, function($item) use($id) {
+    //var_dump($item['id']);    
+    return $item['id'] == $id;
+});
+
+$livro = array_pop($filtrado);
+
+// echo "<pre>";
+// var_dump($livro);
+// echo "</pre>";
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,21 +46,9 @@ require 'dados.php';
         </ul>
     </nav>
   </header>
-  <main class="mx-auto max-w-screen-lg space-y-6">
-    <form class="w-full flex space-x-2 mt-6">
-        <input 
-            type="text" 
-            class="border-stone-800 border-2 rounded-md bg-stone-900 text-sm px-2 py-1 w-full"
-            placeholder="Pesquisar livro"
-            name="pesquisar"
-        />      
-        <button class="hover:underline" type="submit"> 
-            Pesquisar
-        </button>  
-    </form>
-    <section class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-    <?php foreach($livros as $livro ): ?>
-        <div class=" p-2 rounded border-stone-800 border-2 bg-stone-900">
+  <main class="mx-auto max-w-screen-lg space-y-6">   
+    <?= $livro['titulo'] ?>
+     <div class=" p-2 rounded border-stone-800 border-2 bg-stone-900">
             <div class="flex">
                 <div class="w-1/3">imagem</div>
                 <div class="space-y-1">
@@ -57,8 +59,6 @@ require 'dados.php';
             </div>            
             <div class="text-sm mt-2"><?= $livro['descricao'] ?></div>
         </div>
-    <?php endforeach; ?>              
-    </section>
   </main>
 </body>
 </html>
