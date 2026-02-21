@@ -31,5 +31,3 @@ $livros = [
         'descricao' => 'Sátira política em que animais assumem o controle de uma fazenda, representando críticas a regimes autoritários.'
     ]
 ];
-
-?>
